@@ -4,8 +4,8 @@ export default class Connection {
     private static instance: Connection;
     public dbc: any = mysql.createConnection({
         host: 'localhost',
-        user: 'root',
-        password: ''
+        user: 'apicarre_galveg',
+        password: 'Galvegbackend'
     }); 
     /**
      * The Connection's constructor should always be private to prevent direct
