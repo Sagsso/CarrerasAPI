@@ -1,8 +1,8 @@
 import Model from '../libs/Model';
 import ICarrera from '../interfaces/ICarrera';
-// import IModel from '../interfaces/IModel';
+import ModelI from '../interfaces/ModelI';
 
-export default class Carrera extends Model implements ICarrera {
+export default class Carrera extends Model implements ICarrera{
 
     id: number | null = null;
     nombre: string;
@@ -57,9 +57,4 @@ export default class Carrera extends Model implements ICarrera {
         this.categoria = value;
     }
 
-    static async findAll(): Promise<any> {
-        let query = `SELECT * FROM apicarre_carreras.carrera`;
-        const carreras = await Carrera.execQuery(query);
-        return carreras;
-    };
 }

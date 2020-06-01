@@ -12,6 +12,9 @@ import * as CarrerasController from "./controllers/CarrerasController";
 app.route('/api/carreras')
     .get(CarrerasController.carreras)
 
+app.route('/api/carreras/:id')
+    .get(CarrerasController.getCarreraById)
+
 app.get('/api', function (req, res) {
     res.send('API CARRERAS IS RUNNING');
 });

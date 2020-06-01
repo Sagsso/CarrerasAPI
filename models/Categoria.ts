@@ -1,7 +1,9 @@
 import Model from '../libs/Model';
 import ICategoria from '../interfaces/ICategoria';
+import ModelI from '../interfaces/ModelI';
 
-export default class Carrera extends Model implements ICategoria {
+
+export default class Categoria extends Model {
 
     id: number | null = null;
     nombre: string;
@@ -56,4 +58,5 @@ export default class Carrera extends Model implements ICategoria {
     setMarcasAdmitidas(value: Array<string>) {
         this.marcasAdmitidas = value;
     }
+
 }
