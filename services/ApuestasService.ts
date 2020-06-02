@@ -18,6 +18,31 @@ module ApuestasService {
         return await Apuesta.delete('apuesta', id);
     }
 
+    export async function getByApostador(apostador: string): Promise<any> {
+        const query = `SELECT * FROM carreras.apuestas WHERE apostador = "${apostador}"`;
+        return await Apuesta.execQuery(query);
+    }
+
+    export async function getByPiloto(pilotoApostado: string): Promise<any> {
+        const query = `SELECT * FROM carreras.apuestas WHERE piloto_apostado = "${pilotoApostado}"`
+        return await Apuesta.execQuery(query);
+    }
+
+    export async function getByValorMin(valorMin: string): Promise<any> {
+        const query = `SELECT * FROM carreras.apuestas WHERE valor >= ${valorMin}`;
+        return await Apuesta.execQuery(query);
+    }
+
+    export async function getByCarrera(carrera: string): Promise<any> {
+        const query = `SELECT * FROM carreras.apuestas WHERE carrera = "${carrera}"`;
+        return await Apuesta.execQuery(query);
+    }
+
+    export async function updateEstado(id:number,estado: string): Promise<any> {
+        const query = `UPDATE carreras.apuestas SET estado = "${estado}" WHERE id = ${id}`;
+        return await Apuesta.execQuery(query);
+    }
+
 
 }
 

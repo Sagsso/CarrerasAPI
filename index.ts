@@ -19,6 +19,16 @@ app.route('/api/carreras')
 
 app.route('/api/carreras/:id')
     .get(CarrerasController.getCarreraById)
+    .delete(CarrerasController.del)
+
+app.route('/api/carreras/categoria/:categoria')
+    .get(CarrerasController.getByCategoria)
+
+app.route('/api/carreras/cantidad/:numParticipantes')
+    .get(CarrerasController.getByMinParticipantes)
+
+app.route('/api/carreras/participante/:participante')
+    .get(CarrerasController.getByParticipante)
 
 //RUTAS CATEGORÍAS
 app.route('/api/categorias')
@@ -28,6 +38,7 @@ app.route('/api/categorias')
 app.route('/api/categorias/:id')
     .get(CategoriasController.getCategoriaById)
     .put(CategoriasController.update)
+    .delete(CategoriasController.del)
 
 app.route('/api/categorias/:id/capacidad')
     .put(CategoriasController.updateCapacidad)
@@ -48,6 +59,7 @@ app.route('/api/campeones')
 app.route('/api/campeones/:id')
     .get(CampeonesController.getCampeonById)
     .put(CampeonesController.update)
+    .delete(CampeonesController.del)
 
 app.route('/api/campeones/nombre/:piloto')
     .get(CampeonesController.getCampeonByNombre)
@@ -58,12 +70,32 @@ app.route('/api/campeones/:id/titulo')
 app.route('/api/campeones/:id/equipo')
     .put(CampeonesController.updateEquipo)
 
+
+
+
 //RUTAS APUESTAS
 app.route('/api/apuestas')
     .get(ApuestasController.apuestas)
 
 app.route('/api/apuestas/:id')
     .get(ApuestasController.getApuestaById)
+    .delete(ApuestasController.del)
+
+
+app.route('/api/apuestas/apostador/:apostador')
+    .get(ApuestasController.getApuestaByApostador)
+
+app.route('/api/apuestas/piloto/:piloto')
+    .get(ApuestasController.getApuestaByPiloto)
+
+app.route('/api/apuestas/valor/:valormin')
+    .get(ApuestasController.getByValorMin)
+
+app.route('/api/apuestas/carrera/:carrera')
+    .get(ApuestasController.getByCarrera)
+
+app.route('/api/apuestas/:id/estado')
+    .put(ApuestasController.updateEstado)
 
 app.get('/api', function (req, res) {
     res.send('API CARRERAS IS RUNNING');

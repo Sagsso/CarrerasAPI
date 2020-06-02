@@ -43,3 +43,7 @@ export async function updateMarcasAdmitidas(req: Request, res: Response) {
     res.status(200).json(categorias);
 }
 
+export async function del(req: Request, res: Response) {
+    const categorias: any = await CategoriasService.del(+req.params.id);
+    res.status(200).json(categorias);
+}

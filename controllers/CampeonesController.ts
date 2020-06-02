@@ -35,10 +35,15 @@ export async function update(req: Request, res: Response) {
 }
 
 export async function addTitulos(req: Request, res: Response) {
-    const categorias: any = await CampeonesService.addTitulos(+req.params.id, req.body.titulo);
-    res.status(200).json(categorias);
+    const campeones: any = await CampeonesService.addTitulos(+req.params.id, req.body.titulo);
+    res.status(200).json(campeones);
 }
 export async function updateEquipo(req: Request, res: Response) {
-    const categorias: any = await CampeonesService.updateEquipo(+req.params.id, req.body.equipo);
-    res.status(200).json(categorias);
+    const campeones: any = await CampeonesService.updateEquipo(+req.params.id, req.body.equipo);
+    res.status(200).json(campeones);
+}
+
+export async function del(req: Request, res: Response) {
+    const campeones: any = await CampeonesService.del(+req.params.id);
+    res.status(200).json(campeones);
 }
