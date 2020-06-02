@@ -7,12 +7,12 @@ export async function categorias(req: Request, res: Response) {
     res.status(200).json(categorias);
 }
 
-export async function getCarreraById(req: Request, res: Response) {
+export async function getCategoriaById(req: Request, res: Response) {
     const categorias: any = await CategoriasService.getById(+req.params.id);
     res.status(200).json(categorias);
 }
 
-export async function getCarreraByNombre(req: Request, res: Response) {
+export async function getCategoriaByNombre(req: Request, res: Response) {
     const categorias: any = await CategoriasService.getByNombre(req.params.nombre);
     res.status(200).json(categorias);
 }

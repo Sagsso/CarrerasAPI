@@ -12,7 +12,7 @@ import * as CategoriasController from "./controllers/CategoriasController";
 import * as CampeonesController from "./controllers/CampeonesController";
 import * as ApuestasController from "./controllers/ApuestasController";
 
-//Rutas carreras
+//RUTAS CARRERAS
 app.route('/api/carreras')
     .get(CarrerasController.carreras)
     .post(CarrerasController.create)
@@ -26,33 +26,44 @@ app.route('/api/categorias')
     .post(CategoriasController.create)
     
 app.route('/api/categorias/:id')
-    .get(CategoriasController.getCarreraById)
+    .get(CategoriasController.getCategoriaById)
+    .put(CategoriasController.update)
 
 app.route('/api/categorias/:id/capacidad')
     .put(CategoriasController.updateCapacidad)
 
 app.route('/api/categorias/nombre/:nombre')
-    .get(CategoriasController.getCarreraByNombre)
+    .get(CategoriasController.getCategoriaByNombre)
 
 app.route('/api/categorias/:id/marca')
 .put(CategoriasController.updateMarcasAdmitidas)
 
-app.route('/api/categorias/:id')
-    .put(CategoriasController.update)
-//Rutas campeones
+
+
+//RUTAS CAMPEONES
 app.route('/api/campeones')
     .get(CampeonesController.campeones)
     .post(CampeonesController.create)
 
 app.route('/api/campeones/:id')
-    .get(CampeonesController.getCarreraById)
+    .get(CampeonesController.getCampeonById)
+    .put(CampeonesController.update)
 
-//Rutas apuestas
+app.route('/api/campeones/nombre/:piloto')
+    .get(CampeonesController.getCampeonByNombre)
+
+app.route('/api/campeones/:id/titulo')
+    .put(CampeonesController.addTitulos)
+
+app.route('/api/campeones/:id/equipo')
+    .put(CampeonesController.updateEquipo)
+
+//RUTAS APUESTAS
 app.route('/api/apuestas')
     .get(ApuestasController.apuestas)
 
 app.route('/api/apuestas/:id')
-    .get(ApuestasController.getCarreraById)
+    .get(ApuestasController.getApuestaById)
 
 app.get('/api', function (req, res) {
     res.send('API CARRERAS IS RUNNING');

@@ -7,8 +7,13 @@ export async function campeones(req: Request, res: Response) {
     res.status(200).json(campeones);
 }
 
-export async function getCarreraById(req: Request, res: Response) {
+export async function getCampeonById(req: Request, res: Response) {
     const campeones: any = await CampeonesService.getById(+req.params.id);
+    res.status(200).json(campeones);
+}
+
+export async function getCampeonByNombre(req: Request, res: Response) {
+    const campeones: any = await CampeonesService.getByNombre(req.params.piloto);
     res.status(200).json(campeones);
 }
 
@@ -20,4 +25,20 @@ export async function create(req: Request, res: Response) {
 
     const campeones: any = await CampeonesService.create(values);
     res.status(200).json(campeones);
+}
+
+export async function update(req: Request, res: Response) {
+    const titulosStr = req.body.titulos.toString();
+
+    const campeones: any = await CampeonesService.update(+req.params.id, req.body.piloto, titulosStr, req.body.equipo);
+    res.status(200).json(campeones);
+}
+
+export async function addTitulos(req: Request, res: Response) {
+    const categorias: any = await CampeonesService.addTitulos(+req.params.id, req.body.titulo);
+    res.status(200).json(categorias);
+}
+export async function updateEquipo(req: Request, res: Response) {
+    const categorias: any = await CampeonesService.updateEquipo(+req.params.id, req.body.equipo);
+    res.status(200).json(categorias);
 }
