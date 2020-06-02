@@ -11,3 +11,4 @@ export async function getCarreraById(req: Request, res: Response) {
     const campeones: any = await CampeonesService.getById(+req.params.id);
     res.status(200).json(campeones);
 }
+
