@@ -34,6 +34,11 @@ app.route('/api/categorias/:id/capacidad')
 app.route('/api/categorias/nombre/:nombre')
     .get(CategoriasController.getCarreraByNombre)
 
+app.route('/api/categorias/:id/marca')
+.put(CategoriasController.updateMarcasAdmitidas)
+
+app.route('/api/categorias/:id')
+    .put(CategoriasController.update)
 //Rutas campeones
 app.route('/api/campeones')
     .get(CampeonesController.campeones)

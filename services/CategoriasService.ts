@@ -25,6 +25,11 @@ module CategoriasService {
         return await Categoria.delete('categoria', id);
     }
 
+    export async function update(id: number, nombre: string, descripcion: string, capacidad: number, marcasAdmitidas: string): Promise<any> {
+        const query = `UPDATE carreras.categoria SET nombre = "${nombre}", descripcion = "${descripcion}", capacidad = ${capacidad}, marcas_admitidas = "${marcasAdmitidas}" WHERE id = ${id}`
+        return await Categoria.execQuery(query);
+    }
+
     export async function updateCapacidad(id: number, capacidad: number): Promise<any> {
         const query = `UPDATE carreras.categoria SET capacidad = ${capacidad} WHERE id = ${id}`
         return await Categoria.execQuery(query);
@@ -32,10 +37,13 @@ module CategoriasService {
 
     export async function updateMarcasAdmitidas(id: number, newMarca: string): Promise<any> {
 
-        let arrayMarcas: string = '';
+        const query1 = `SELECT marcas_admitidas FROM carreras.categoria WHERE id = ${id}`
+        const allMarcas: any = await Categoria.execQuery(query1);
+        console.log(allMarcas);
+        let arrayMarcas: string = `${allMarcas[0].marcas_admitidas},${newMarca}`;
 
-        const query = `UPDATE carreras.categoria SET marcas_admitidas = ${arrayMarcas} WHERE id = ${id}`
-        return await Categoria.execQuery(query);
+        const query2 = `UPDATE carreras.categoria SET marcas_admitidas = "${arrayMarcas}" WHERE id = ${id}`
+        return await Categoria.execQuery(query2);
     }
 
 

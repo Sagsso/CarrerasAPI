@@ -26,6 +26,13 @@ export async function create(req: Request, res: Response) {
     res.status(200).json(categorias);
 }
 
+export async function update(req: Request, res: Response) {
+    const marcasAdmitidasStr = req.body.marcasAdmitidas.toString();
+
+    const categorias: any = await CategoriasService.update(+req.params.id, req.body.nombre, req.body.descripcion, req.body.capacidad, marcasAdmitidasStr);
+    res.status(200).json(categorias);
+}
+
 export async function updateCapacidad(req: Request, res: Response) {
     const categorias: any = await CategoriasService.updateCapacidad(+req.params.id, req.body.capacidad);
     res.status(200).json(categorias);
