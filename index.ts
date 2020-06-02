@@ -15,20 +15,29 @@ import * as ApuestasController from "./controllers/ApuestasController";
 //Rutas carreras
 app.route('/api/carreras')
     .get(CarrerasController.carreras)
+    .post(CarrerasController.create)
 
 app.route('/api/carreras/:id')
     .get(CarrerasController.getCarreraById)
 
-//Rutas categorías
+//RUTAS CATEGORÍAS
 app.route('/api/categorias')
     .get(CategoriasController.categorias)
-
+    .post(CategoriasController.create)
+    
 app.route('/api/categorias/:id')
     .get(CategoriasController.getCarreraById)
+
+app.route('/api/categorias/:id/capacidad')
+    .put(CategoriasController.updateCapacidad)
+
+app.route('/api/categorias/nombre/:nombre')
+    .get(CategoriasController.getCarreraByNombre)
 
 //Rutas campeones
 app.route('/api/campeones')
     .get(CampeonesController.campeones)
+    .post(CampeonesController.create)
 
 app.route('/api/campeones/:id')
     .get(CampeonesController.getCarreraById)

@@ -10,6 +10,14 @@ module CampeonsService {
         return await Campeon.findOne('campeon', id);
     }
 
+    export async function create(values: Array<any>): Promise<any> {
+        let sql = `INSERT INTO carreras.campeon (piloto, titulos, equipo) VALUES ?`;
+        return await Campeon.create(sql, values);
+    }
+    export async function del(id: number): Promise<any> {
+        return await Campeon.delete('campeon', id);
+    }
+
 
 }
 

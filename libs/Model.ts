@@ -40,14 +40,28 @@ export default class Model {
         const data = await Model.execQuery(query);
         return data;
     }
-    static async create(): Promise<any> {
-        throw new Error("Method not implemented.");
+    static async create(sql: string, values: Array<any>): Promise<any> {
+        
+        const data = await Model.dbc.query(sql, [values], function (err: any, result: any) {
+            if (err){
+                console.log(err);
+                return false;  
+            }
+            console.log("Number of records inserted: " + result.affectedRows);
+            return result.affectedRows;
+        });
+        return `Se ha añadido ${data} fila(s)`;
     }
+
     static async update(): Promise<any> {
         throw new Error("Method not implemented.");
     }
-    static async delete(): Promise<any> {
-        throw new Error("Method not implemented.");
+    static async delete(table: string, id: number): Promise<any> {
+        let query = `DELETE FROM carreras.${table} WHERE id = ${id}`
+        const data = await Model.execQuery(query);
+        return data;
+        
     }
+    
 
 }
