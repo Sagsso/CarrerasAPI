@@ -21,7 +21,7 @@ module CampeonsService {
     }
 
     export async function update(id: number, piloto: string, titulos: string, equipo: string): Promise<any> {
-        const query = `UPDATE carreras.campeon SET piloto = "${piloto}", titulos = "${titulos}", equipo = "${equipo}", WHERE id = ${id}`
+        const query = `UPDATE carreras.campeon SET piloto = "${piloto}", titulos = "${titulos}", equipo = "${equipo}" WHERE id = ${id}`
         return await Campeon.execQuery(query);
     }
 
@@ -42,7 +42,7 @@ module CampeonsService {
 
 
     export async function updateEquipo(id: number,  titulos: string): Promise<any> {
-        const query = `UPDATE carreras.campeon SET titulos = "${titulos}" WHERE id = ${id}`
+        const query = `UPDATE carreras.campeon SET equipo = "${titulos}" WHERE id = ${id}`
         return await Campeon.execQuery(query);
     }
 }

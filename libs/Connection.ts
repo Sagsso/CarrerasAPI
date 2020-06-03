@@ -2,10 +2,10 @@ const mysql = require('mysql');
 
 export default class Connection {
     private static instance: Connection;
-    public dbc: any = mysql.createConnection({
+    public static dbc: any = mysql.createConnection({
         host: 'localhost',
-        user: 'apicarre_galveg',
-        password: 'Galvegbackend'
+        user: 'root',
+        password: ''
     }); 
     /**
      * The Connection's constructor should always be private to prevent direct
@@ -13,11 +13,11 @@ export default class Connection {
      */
     private constructor() { }
 
-    public static getInstance(): Connection {
+    public static getInstance() {
         if (!Connection.instance) {
             Connection.instance = new Connection();
         }
 
-        return Connection.instance;
+        return Connection.dbc;
     }
 }
