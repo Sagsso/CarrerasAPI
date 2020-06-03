@@ -11,24 +11,24 @@ module CarrerasService {
     }
 
     export async function getByCategoria(categoria: string): Promise<any> {
-        const query = `SELECT * FROM carreras.carrera WHERE categoria = "${categoria}"`
+        const query = `SELECT * FROM apicarre_carreras.carrera WHERE categoria = "${categoria}"`
         return await Carrera.execQuery(query);
     }
     export async function getByMinParticipantes(numParticipantes: number): Promise<any> {
-        const query = `SELECT * FROM carreras.carrera WHERE numParticipantes >= ${numParticipantes}`
+        const query = `SELECT * FROM apicarre_carreras.carrera WHERE numParticipantes >= ${numParticipantes}`
         return await Carrera.execQuery(query);
     }
     export async function getByParticipante(participante: string): Promise<any> {
-        const query = `SELECT * FROM carreras.carrera WHERE participantes LIKE "%${participante}%"`
+        const query = `SELECT * FROM apicarre_carreras.carrera WHERE participantes LIKE "%${participante}%"`
         return await Carrera.execQuery(query);
     }
     export async function getByNombreCarrera(nombre: string): Promise<any> {
-        const query = `SELECT * FROM carreras.carrera WHERE nombre = "${nombre}"`
+        const query = `SELECT * FROM apicarre_carreras.carrera WHERE nombre = "${nombre}"`
         return await Carrera.execQuery(query);
     }
 
     export async function create(values: Array<any>): Promise<any> {
-        let sql = `INSERT INTO carreras.carrera (nombre, numParticipantes, participantes, categoria) VALUES ?`;
+        let sql = `INSERT INTO apicarre_carreras.carrera (nombre, numParticipantes, participantes, categoria) VALUES ?`;
         return await Carrera.create(sql, values);
     }
 

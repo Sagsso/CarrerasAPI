@@ -12,12 +12,12 @@ module CategoriasService {
     }
 
     export async function getByNombre(nombre: string): Promise<any> {
-        const query = `SELECT * FROM carreras.categoria WHERE nombre = "${nombre}"`
+        const query = `SELECT * FROM apicarre_carreras.categoria WHERE nombre = "${nombre}"`
         return await Categoria.execQuery(query);
     }
 
     export async function create(values: Array<any>): Promise<any> {
-        let sql = `INSERT INTO carreras.categoria (nombre, descripcion, capacidad, marcas_admitidas) VALUES ?`;
+        let sql = `INSERT INTO apicarre_carreras.categoria (nombre, descripcion, capacidad, marcas_admitidas) VALUES ?`;
         return await Categoria.create(sql, values);
     }
 
@@ -26,23 +26,23 @@ module CategoriasService {
     }
 
     export async function update(id: number, nombre: string, descripcion: string, capacidad: number, marcasAdmitidas: string): Promise<any> {
-        const query = `UPDATE carreras.categoria SET nombre = "${nombre}", descripcion = "${descripcion}", capacidad = ${capacidad}, marcas_admitidas = "${marcasAdmitidas}" WHERE id = ${id}`
+        const query = `UPDATE apicarre_carreras.categoria SET nombre = "${nombre}", descripcion = "${descripcion}", capacidad = ${capacidad}, marcas_admitidas = "${marcasAdmitidas}" WHERE id = ${id}`
         return await Categoria.execQuery(query);
     }
 
     export async function updateCapacidad(id: number, capacidad: number): Promise<any> {
-        const query = `UPDATE carreras.categoria SET capacidad = ${capacidad} WHERE id = ${id}`
+        const query = `UPDATE apicarre_carreras.categoria SET capacidad = ${capacidad} WHERE id = ${id}`
         return await Categoria.execQuery(query);
     }
 
     export async function updateMarcasAdmitidas(id: number, newMarca: string): Promise<any> {
 
-        const query1 = `SELECT marcas_admitidas FROM carreras.categoria WHERE id = ${id}`
+        const query1 = `SELECT marcas_admitidas FROM apicarre_carreras.categoria WHERE id = ${id}`
         const allMarcas: any = await Categoria.execQuery(query1);
         console.log(allMarcas);
         let arrayMarcas: string = `${allMarcas[0].marcas_admitidas},${newMarca}`;
 
-        const query2 = `UPDATE carreras.categoria SET marcas_admitidas = "${arrayMarcas}" WHERE id = ${id}`
+        const query2 = `UPDATE apicarre_carreras.categoria SET marcas_admitidas = "${arrayMarcas}" WHERE id = ${id}`
         return await Categoria.execQuery(query2);
     }
 

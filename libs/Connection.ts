@@ -2,11 +2,11 @@ const mysql = require('mysql');
 
 export default class Connection {
     private static instance: Connection;
-    public static dbc: any = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: ''
-    }); 
+    static dbc: any = mysql.createConnection({
+            host: 'localhost',
+            user: 'apicarre_galveg',
+            password: 'Galvegbackend'
+        }); 
     /**
      * The Connection's constructor should always be private to prevent direct
      * construction calls with the `new` operator.

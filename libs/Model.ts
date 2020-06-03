@@ -28,12 +28,12 @@ export default class Model {
 
     //apicarre_carreras db in hosting
     static async findAll(table: string ): Promise<any> {
-        let query = `SELECT * FROM carreras.${table}`;
+        let query = `SELECT * FROM apicarre_carreras.${table}`;
         const data = await Model.execQuery(query);
         return data;
     }
     static async findOne(table: string, id: number): Promise<any> {
-        let query = `SELECT * FROM carreras.${table} WHERE id = ${id}`;
+        let query = `SELECT * FROM apicarre_carreras.${table} WHERE id = ${id}`;
         const data = await Model.execQuery(query);
         return data;
     }
@@ -51,12 +51,12 @@ export default class Model {
     }
 
     static async update(table: string, sql: string): Promise<any> {
-        let query = `UPDATE carreras.${table} SET ${sql}`;
+        let query = `UPDATE apicarre_carreras.${table} SET ${sql}`;
         const data = await Model.execQuery(query);
         return data;
     }
     static async delete(table: string, id: number): Promise<any> {
-        let query = `DELETE FROM carreras.${table} WHERE id = ${id}`
+        let query = `DELETE FROM apicarre_carreras.${table} WHERE id = ${id}`
         const data = await Model.execQuery(query);
         return data;
         
