@@ -42,12 +42,17 @@ export default class Model {
         const data = await Model.connection.query(sql, [values], function (err: any, result: any) {
             if (err){
                 console.log(err);
-                return false;  
+                return 0;  
             }
             console.log("Number of records inserted: " + result.affectedRows);
-            return result.affectedRows;
+            return 1;
         });
-        return `Se ha añadido ${data} fila(s)`;
+        console.log(data);
+        if(data==1) {
+            return {msg: "Elemento creado correctamente"};
+        } else {
+            return { error: true, msg: "Error en los datos a insertar" };
+        }
     }
 
     static async update(table: string, sql: string): Promise<any> {

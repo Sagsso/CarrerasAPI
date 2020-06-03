@@ -39,7 +39,11 @@ export async function create(req: Request, res: Response) {
     let values = [[req.body.nombre, req.body.numParticipantes, participantesStr, req.body.categoria]];
 
     const carreras: any = await CarrerasService.create(values);
-    res.status(200).json(carreras);
+    if (!carreras.error) {
+        res.status(200).json(carreras);
+    } else {
+        res.status(400).json(carreras);
+    }
 }
 
 export async function update(req: Request, res: Response) {

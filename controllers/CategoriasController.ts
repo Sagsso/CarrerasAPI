@@ -23,7 +23,12 @@ export async function create(req: Request, res: Response) {
     let values = [[req.body.nombre, req.body.descripcion, req.body.capacidad, marcasAdmitidasStr]];
     
     const categorias: any = await CategoriasService.create(values);
-    res.status(200).json(categorias);
+    console.log(categorias);
+    if(!categorias.error) {
+        res.status(200).json(categorias);
+    } else {
+        res.status(400).json(categorias);
+    }
 }
 
 export async function update(req: Request, res: Response) {

@@ -34,7 +34,15 @@ module CarrerasService {
 
     export async function update(id: number, nombre: string, numParticipantes: number, participantes: number, categoria: string): Promise<any> {
         const sql = `nombre = "${nombre}", numParticipantes = ${numParticipantes}, participantes = "${participantes}", categoria = "${categoria}" WHERE id = ${id}`
-        return await Carrera.update("carrera", sql);
+        const updating = await Carrera.update("carrera", sql);
+        console.log(updating);
+        if (updating) {
+            return {error: false, msn: `La categoría con id ${id} ha sido actualizada.`}
+        } else {
+            return {
+                error: true,
+                msn: `La categoría con id ${id} no ha podido ser actualizada.`};
+        }
     }
     
     export async function del(id: number): Promise<any> {

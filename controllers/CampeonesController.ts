@@ -24,7 +24,11 @@ export async function create(req: Request, res: Response) {
     let values = [[req.body.piloto, titulosStr, req.body.equipo]];
 
     const campeones: any = await CampeonesService.create(values);
-    res.status(200).json(campeones);
+    if (!campeones.error) {
+        res.status(200).json(campeones);
+    } else {
+        res.status(400).json(campeones);
+    }
 }
 
 export async function update(req: Request, res: Response) {
