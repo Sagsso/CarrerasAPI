@@ -38,21 +38,16 @@ export default class Model {
         return data;
     }
     static async create(sql: string, values: Array<any>): Promise<any> {
-        
+
         const data = await Model.connection.query(sql, [values], function (err: any, result: any) {
-            if (err){
+            if (err) {
                 console.log(err);
-                return 0;  
+                return false;
             }
             console.log("Number of records inserted: " + result.affectedRows);
-            return 1;
+            return result.affectedRows;
         });
-        console.log(data);
-        if(data==1) {
-            return {msg: "Elemento creado correctamente"};
-        } else {
-            return { error: true, msg: "Error en los datos a insertar" };
-        }
+        return `Se ha añadido ${data} fila(s)`;
     }
 
     static async update(table: string, sql: string): Promise<any> {

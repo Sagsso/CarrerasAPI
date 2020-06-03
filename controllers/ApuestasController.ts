@@ -4,29 +4,35 @@ import ApuestasService from "../services/ApuestasService";
 
 export async function apuestas(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getAll();
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 
 export async function getApuestaById(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getById(+req.params.id);
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 
 export async function getApuestaByApostador(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getByApostador(req.params.apostador);
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 export async function getApuestaByPiloto(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getByPiloto(req.params.piloto);
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 export async function getByValorMin(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getByValorMin(+req.params.valormin);
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 export async function getByCarrera(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.getByCarrera(req.params.carrera);
-    res.status(200).json(apuestas);
+        sendGetJson(req, res, apuestas);
+
 }
 export async function updateEstado(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.updateEstado(+req.params.id, req.body.estado);
@@ -52,4 +58,14 @@ export async function create(req: Request, res: Response) {
 export async function del(req: Request, res: Response) {
     const apuestas: any = await ApuestasService.del(+req.params.id);
     res.status(200).json(apuestas);
+}
+
+function sendGetJson(req: Request, res: Response, data: any) {
+    let result;
+    if (data.length <= 0) {
+        result = { error: true, msg: `No se encontraron carrera(s)` };
+        res.status(404).json(result);
+    } else {
+        res.status(200).json(data);
+    }
 }

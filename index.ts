@@ -152,6 +152,9 @@ app.route('/api/campeones')
         
     }, CampeonesController.create)
 
+app.route('/api/campeones/pilotos')
+    .get(CampeonesController.consumirPilotos);
+
 app.route('/api/campeones/:id')
     .get(CampeonesController.getCampeonById)
     .put((req, res, next) => {

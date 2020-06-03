@@ -4,17 +4,18 @@ import CategoriasService from "../services/CategoriasService";
 
 export async function categorias(req: Request, res: Response) {
     const categorias: any = await CategoriasService.getAll();
-    res.status(200).json(categorias);
+    sendGetJson(req, res, categorias);
+
 }
 
 export async function getCategoriaById(req: Request, res: Response) {
     const categorias: any = await CategoriasService.getById(+req.params.id);
-    res.status(200).json(categorias);
+        sendGetJson(req, res, categorias);
 }
 
 export async function getCategoriaByNombre(req: Request, res: Response) {
     const categorias: any = await CategoriasService.getByNombre(req.params.nombre);
-    res.status(200).json(categorias);
+        sendGetJson(req, res, categorias);
 }
 
 export async function create(req: Request, res: Response) {
@@ -51,4 +52,14 @@ export async function updateMarcasAdmitidas(req: Request, res: Response) {
 export async function del(req: Request, res: Response) {
     const categorias: any = await CategoriasService.del(+req.params.id);
     res.status(200).json(categorias);
+}
+
+function sendGetJson(req: Request, res: Response, data: any) {
+    let result;
+    if (data.length <= 0) {
+        result = { error: true, msg: `No se encontraron carrera(s)` };
+        res.status(404).json(result);
+    } else {
+        res.status(200).json(data);
+    }
 }

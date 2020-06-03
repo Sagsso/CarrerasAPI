@@ -1,20 +1,21 @@
 import { Request, Response } from "express";
 import CampeonesService from "../services/CampeonesService";
+const fetch = require('node-fetch');
 
 
 export async function campeones(req: Request, res: Response) {
     const campeones: any = await CampeonesService.getAll();
-    res.status(200).json(campeones);
+        sendGetJson(req,res,campeones);
 }
 
 export async function getCampeonById(req: Request, res: Response) {
     const campeones: any = await CampeonesService.getById(+req.params.id);
-    res.status(200).json(campeones);
+        sendGetJson(req,res,campeones);
 }
 
 export async function getCampeonByNombre(req: Request, res: Response) {
     const campeones: any = await CampeonesService.getByNombre(req.params.piloto);
-    res.status(200).json(campeones);
+        sendGetJson(req,res,campeones);
 }
 
 export async function create(req: Request, res: Response) {
@@ -50,4 +51,27 @@ export async function updateEquipo(req: Request, res: Response) {
 export async function del(req: Request, res: Response) {
     const campeones: any = await CampeonesService.del(+req.params.id);
     res.status(200).json(campeones);
+}
+
+export async function consumirPilotos(req: Request, res: Response) {
+    let pilotos = await fetch('http://api.finalpilotos.com/pilots').then((res:any) => res.json());
+
+    let arrayNames: Array<string> = [];
+    // console.log(pilotos[0].Nombre);
+    pilotos.forEach((element: any )=> {
+        arrayNames.push(element.Nombre);
+    });
+
+    console.log(arrayNames);
+    res.status(200).json(arrayNames);
+}
+
+function sendGetJson(req: Request, res: Response, data: any) {
+    let result;
+    if (data.length <= 0) {
+        result = { error: true, msg: `No se encontraron carrera(s)` };
+        res.status(404).json(result);
+    } else {
+        res.status(200).json(data);
+    }
 }
