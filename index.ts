@@ -69,9 +69,9 @@ app.route('/api/categorias')
     .get(CategoriasController.categorias) //No auth
     .post((req, res, next) => {
        
-    let trustedIps = ['123.123.123.123'];
+    let trustedIps = ['186.81.100.156','192.168.0.9'];
     let requestIP: string = req.connection.remoteAddress || '';
-    if(trustedIps.indexOf(requestIP) >= 0) {
+    //if(trustedIps.indexOf(requestIP) >= 0) {
         
         let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
         if (!result.error) {
@@ -80,9 +80,9 @@ app.route('/api/categorias')
             res.status(result.status).json({ error: true, msg: result.msg });
         }
 
-    } else {
-        res.status(401).json({ error: true, msg: "Not an Authorized IP" })
-    }
+    //} else {
+        //res.status(401).json({ error: true, msg: "Not an Authorized IP" })
+    //}
         
     }, CategoriasController.create)
     
