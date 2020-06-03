@@ -39,7 +39,7 @@ module ApuestasService {
     }
 
     export async function getByCarrera(carrera: string): Promise<any> {
-        const query = `SELECT * FROM carreras.apuesta WHERE carrera = "${carrera}"`;
+        const query = `SELECT * FROM carreras.apuesta WHERE nombre_carrera = "${carrera}"`;
         return await Apuesta.execQuery(query);
     }
 
