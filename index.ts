@@ -12,6 +12,9 @@ import * as CategoriasController from "./controllers/CategoriasController";
 import * as CampeonesController from "./controllers/CampeonesController";
 import * as ApuestasController from "./controllers/ApuestasController";
 
+//Policies
+import Policies from "./sso/Policies";
+
 //RUTAS CARRERAS
 app.route('/api/carreras')
     .get(CarrerasController.carreras)
@@ -36,22 +39,67 @@ app.route('/api/carreras/nombre/:carrera')
 
 //RUTAS CATEGORÍAS
 app.route('/api/categorias')
-    .get(CategoriasController.categorias)
-    .post(CategoriasController.create)
+    .get(CategoriasController.categorias) //No auth
+    .post((req, res, next) => {
+       
+        let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
+        if (!result.error) {
+            next();
+        }else{
+            res.status(result.status).json({ error: true, msg: result.msg });
+        }
+        
+    }, CategoriasController.create)
     
 app.route('/api/categorias/:id')
     .get(CategoriasController.getCategoriaById)
-    .put(CategoriasController.update)
-    .delete(CategoriasController.del)
+    .put((req, res, next) => {
+       
+        let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
+        if (!result.error) {
+            next();
+        }else{
+            res.status(result.status).json({ error: true, msg: result.msg });
+        }
+        
+    }, CategoriasController.update)
+    .delete((req, res, next) => {
+       
+        let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
+        if (!result.error) {
+            next();
+        }else{
+            res.status(result.status).json({ error: true, msg: result.msg });
+        }
+        
+    }, CategoriasController.del)
 
 app.route('/api/categorias/:id/capacidad')
-    .put(CategoriasController.updateCapacidad)
+    .put((req, res, next) => {
+       
+        let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
+        if (!result.error) {
+            next();
+        }else{
+            res.status(result.status).json({ error: true, msg: result.msg });
+        }
+        
+    }, CategoriasController.updateCapacidad)
 
 app.route('/api/categorias/nombre/:nombre')
     .get(CategoriasController.getCategoriaByNombre)
 
 app.route('/api/categorias/:id/marca')
-.put(CategoriasController.updateMarcasAdmitidas)
+    .put((req, res, next) => {
+       
+        let result = Policies.verification(req.header("Categoria-key"),"450203b9374bdf50208ecdb5d55f8d4e9aa5547c5db1344a526b3db32ba4171f109c2913dab3976691933819ebf4c8e3396c69822e090cad37fbf2da896baa84",req.headers.host,"localhost:3000");
+        if (!result.error) {
+            next();
+        }else{
+            res.status(result.status).json({ error: true, msg: result.msg });
+        }
+        
+    }, CategoriasController.updateMarcasAdmitidas)
 
 
 
@@ -106,7 +154,8 @@ app.get('/api', function (req, res) {
     res.send('API CARRERAS IS RUNNING');
 });
 
-
 app.listen(port, () => {
     console.log(`Node JS Server started at port ${port}`);
 });
+
+
