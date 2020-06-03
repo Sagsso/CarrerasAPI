@@ -50,8 +50,10 @@ export default class Model {
         return `Se ha añadido ${data} fila(s)`;
     }
 
-    static async update(): Promise<any> {
-        throw new Error("Method not implemented.");
+    static async update(table: string, sql: string): Promise<any> {
+        let query = `UPDATE carreras.${table} SET ${sql}`;
+        const data = await Model.execQuery(query);
+        return data;
     }
     static async delete(table: string, id: number): Promise<any> {
         let query = `DELETE FROM carreras.${table} WHERE id = ${id}`

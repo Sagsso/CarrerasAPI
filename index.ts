@@ -31,6 +31,9 @@ app.route('/api/carreras/cantidad/:numParticipantes')
 app.route('/api/carreras/participante/:participante')
     .get(CarrerasController.getByParticipante)
 
+app.route('/api/carreras/nombre/:carrera')
+    .get(CarrerasController.getByNombreCarrera)
+
 //RUTAS CATEGORÍAS
 app.route('/api/categorias')
     .get(CategoriasController.categorias)

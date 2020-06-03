@@ -33,8 +33,8 @@ module CarrerasService {
     }
 
     export async function update(id: number, nombre: string, numParticipantes: number, participantes: number, categoria: string): Promise<any> {
-        const query = `UPDATE carreras.carrera SET nombre = "${nombre}", numParticipantes = ${numParticipantes}, participantes = ${participantes}, categoria = "${categoria}" WHERE id = ${id}`
-        return await Carrera.execQuery(query);
+        const sql = `nombre = "${nombre}", numParticipantes = ${numParticipantes}, participantes = "${participantes}", categoria = "${categoria}" WHERE id = ${id}`
+        return await Carrera.update("carrera", sql);
     }
     
     export async function del(id: number): Promise<any> {
