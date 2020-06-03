@@ -19,6 +19,7 @@ app.route('/api/carreras')
 
 app.route('/api/carreras/:id')
     .get(CarrerasController.getCarreraById)
+    .put(CarrerasController.update)
     .delete(CarrerasController.del)
 
 app.route('/api/carreras/categoria/:categoria')
@@ -79,6 +80,7 @@ app.route('/api/apuestas')
 
 app.route('/api/apuestas/:id')
     .get(ApuestasController.getApuestaById)
+    .put(ApuestasController.update)
     .delete(ApuestasController.del)
 
 
