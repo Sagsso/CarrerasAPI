@@ -18,7 +18,7 @@ export async function getByCategoria(req: Request, res: Response) {
 }
 
 export async function getByMinParticipantes(req: Request, res: Response) {
-    const carreras: any = await CarrerasService.getByMinParticipantes(req.params.numParticipantes);
+    const carreras: any = await CarrerasService.getByMinParticipantes(+req.params.numParticipantes);
     res.status(200).json(carreras);
 }
 
@@ -40,6 +40,14 @@ export async function create(req: Request, res: Response) {
 
     const carreras: any = await CarrerasService.create(values);
     res.status(200).json(carreras);
+}
+
+export async function update(req: Request, res: Response) {
+
+    const participantesStr = req.body.participantes.toString();
+
+    const categorias: any = await CarrerasService.update(+req.params.id, req.body.nombre, req.body.numParticipantes, participantesStr, req.body.categoria);
+    res.status(200).json(categorias);
 }
 
 export async function del(req: Request, res: Response) {

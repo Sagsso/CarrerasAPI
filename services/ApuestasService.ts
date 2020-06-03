@@ -14,32 +14,37 @@ module ApuestasService {
         return await Apuesta.create(sql, values);
     }
 
+    export async function update(id: number, apostador: string, valor: number, nombre_carrera: string, pilotoApostado: string, estado: string): Promise<any> {
+        const query = `UPDATE carreras.apuesta SET apostador = "${apostador}", valor = ${valor}, nombre_carrera = "${nombre_carrera}",piloto_apostado = "${pilotoApostado}", estado = "${estado}" WHERE id = ${id}`
+        return await Apuesta.execQuery(query);
+    }
+
     export async function del(id: number): Promise<any> {
         return await Apuesta.delete('apuesta', id);
     }
 
     export async function getByApostador(apostador: string): Promise<any> {
-        const query = `SELECT * FROM carreras.apuestas WHERE apostador = "${apostador}"`;
+        const query = `SELECT * FROM carreras.apuesta WHERE apostador = "${apostador}"`;
         return await Apuesta.execQuery(query);
     }
 
     export async function getByPiloto(pilotoApostado: string): Promise<any> {
-        const query = `SELECT * FROM carreras.apuestas WHERE piloto_apostado = "${pilotoApostado}"`
+        const query = `SELECT * FROM carreras.apuesta WHERE piloto_apostado = "${pilotoApostado}"`
         return await Apuesta.execQuery(query);
     }
 
-    export async function getByValorMin(valorMin: string): Promise<any> {
-        const query = `SELECT * FROM carreras.apuestas WHERE valor >= ${valorMin}`;
+    export async function getByValorMin(valorMin: number): Promise<any> {
+        const query = `SELECT * FROM carreras.apuesta WHERE valor >= ${valorMin}`;
         return await Apuesta.execQuery(query);
     }
 
     export async function getByCarrera(carrera: string): Promise<any> {
-        const query = `SELECT * FROM carreras.apuestas WHERE carrera = "${carrera}"`;
+        const query = `SELECT * FROM carreras.apuesta WHERE carrera = "${carrera}"`;
         return await Apuesta.execQuery(query);
     }
 
     export async function updateEstado(id:number,estado: string): Promise<any> {
-        const query = `UPDATE carreras.apuestas SET estado = "${estado}" WHERE id = ${id}`;
+        const query = `UPDATE carreras.apuesta SET estado = "${estado}" WHERE id = ${id}`;
         return await Apuesta.execQuery(query);
     }
 
