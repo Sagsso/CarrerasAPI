@@ -45,6 +45,12 @@ module CampeonsService {
         const query = `UPDATE carreras.campeon SET equipo = "${titulos}" WHERE id = ${id}`
         return await Campeon.execQuery(query);
     }
+
+
+    export async function addPilotosToCampeones(values: Array<any>) {
+        let query = `INSERT INTO carreras.campeon (piloto) VALUES ? `;
+        return await Campeon.create(query, values);
+    }
 }
 
 export default CampeonsService;

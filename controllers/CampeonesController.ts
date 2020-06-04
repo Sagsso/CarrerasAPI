@@ -54,16 +54,41 @@ export async function del(req: Request, res: Response) {
 }
 
 export async function consumirPilotos(req: Request, res: Response) {
-    let pilotos = await fetch('http://api.finalpilotos.com/pilots').then((res:any) => res.json());
+    const pilotos = await fetch('http://api.finalpilotos.com/pilots').then((res:any) => res.json());
+    const campeones: any = await CampeonesService.getAll();
 
-    let arrayNames: Array<string> = [];
-    // console.log(pilotos[0].Nombre);
-    pilotos.forEach((element: any )=> {
-        arrayNames.push(element.Nombre);
+
+    let nombresPilotos: Array<string> =[];
+    let nuevosPilotos: string[][] = [];
+
+    pilotos.forEach((pilotico: any) => {
+        nombresPilotos.push(pilotico.Nombre)
     });
 
-    console.log(arrayNames);
-    res.status(200).json(arrayNames);
+    // console.log(pilotos[0].Nombre);
+    campeones.forEach((campeon: any )=> {
+        // console.log(campeon.piloto)
+        if (nombresPilotos.indexOf(campeon.piloto) >= 0 ) {
+            // console.log(`Eliminando ${campeon.piloto}...`);
+            nombresPilotos.splice(nombresPilotos.indexOf(campeon.piloto), 1);
+        }
+    });
+
+    nombresPilotos.forEach(nombre => {
+        let newArr = [nombre];
+        nuevosPilotos.push(newArr);
+    });
+
+    console.log(nuevosPilotos);    
+    if(nuevosPilotos.length>0) {
+        let addedPilots = await CampeonesService.addPilotosToCampeones(nuevosPilotos);
+        // console.log(addedPilots);
+        res.status(200).json({msg: "Se han agregado los nuevos pilotos de la API Pilotos", data: addedPilots});
+    } else {
+        res.status(200).json({ msg: "No hay nuevos pilotos para sumarse a campeones."});
+
+    }
+
 }
 
 function sendGetJson(req: Request, res: Response, data: any) {
